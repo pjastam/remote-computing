@@ -1,10 +1,15 @@
 # Set up remote machines --------------------------------------------------
 
+ndroplets <- 2
+
 # Create two new droplets with Docker pre-installed
 # Here I'm using "s-4vcpu-8gb", which has 4 CPUs and 8 GB of RAM.
 # Run analogsea::sizes() to see all the available sizes
-droplet1 <- docklet_create(region = "sfo2", size = "s-4vcpu-8gb")
-droplet2 <- docklet_create(region = "sfo2", size = "s-4vcpu-8gb")
+
+for(i in 1:ndroplets) {
+  nam <- paste0("droplet", i)
+  assign(nam, docklet_create(region = "sfo2", size = "s-4vcpu-8gb"))
+}
 
 # Pull the docker image with the environment for this project
 #
